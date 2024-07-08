@@ -5,7 +5,7 @@ const globalFunctions = require('../utils/globalFunctions');
 const globalMessage = require('../utils/globalMessage');
 
 const generateToken = (user) => {
-    return jwt.sign({ id: user._id }, SECRET, { expiresIn: '15m' });
+    return jwt.sign({ id: user._id }, SECRET, { expiresIn: '24h' });
 };
 
 const generateRefreshToken = (user) => {
