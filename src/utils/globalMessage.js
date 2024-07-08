@@ -10,4 +10,7 @@ module.exports = {
     postUpdated: 'Post updated successfully',
     postDeleted: 'Post deleted successfully',
     commentCreated: 'Comment created successfully',
+    emailAlreadyInUse: 'Email already in use',
+    usernameAlreadyInUse: 'Username already in use', 
+    serverError: 'An error occurred on the server',  
 };

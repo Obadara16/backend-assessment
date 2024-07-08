@@ -13,12 +13,24 @@ const generateRefreshToken = (user) => {
 };
 
 const register = async (userData) => {
-    const { username, email, password } = userData;
-    const hashedPassword = await globalFunctions.hashPassword(password);
-    const user = new User({ username, email, password: hashedPassword });
-    await user.save();
-    return { user, message: globalMessage.registerSuccessful };
+  const { username, email, password } = userData;
+  const hashedPassword = await globalFunctions.hashPassword(password);
+
+  const existingUserByEmail = await User.findOne({ email });
+  if (existingUserByEmail) {
+      throw new Error(globalMessage.emailAlreadyInUse);
+  }
+
+  const existingUserByUsername = await User.findOne({ username });
+  if (existingUserByUsername) {
+      throw new Error(globalMessage.usernameAlreadyInUse);
+  }
+
+  const user = new User({ username, email, password: hashedPassword });
+  await user.save();
+  return { user, message: globalMessage.registerSuccessful };
 };
+
 
 const login = async (loginData) => {
     const { email, password } = loginData;
